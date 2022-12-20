@@ -12,7 +12,7 @@ export default function Home() {
   }
 
   const { avatar_url, name, public_repos, followers, following } = state.user
-
+console.log(name)
   const handleLogout = () => {
     dispatch({
       type: "LOGOUT"
