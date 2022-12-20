@@ -35,6 +35,7 @@ export default function Login() {
       })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
           dispatch({
             type: "LOGIN",
             payload: { user: data, isLoggedIn: true }
@@ -58,7 +59,7 @@ export default function Login() {
       <section className="container">
         <div>
           <h1>Welcome</h1>
-          <span>Super amazing app</span>
+          <span>Mi app</span>
           <span>{data.errorMessage}</span>
           <div className="login-container">
             {data.isLoading ? (
@@ -78,7 +79,7 @@ export default function Login() {
                   }}
                 >
                   <GithubIcon />
-                  <span>Login with GitHub</span>
+                  <span>Login con GitHub</span>
                 </a>
               </>
             )}
