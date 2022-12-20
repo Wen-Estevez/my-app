@@ -8,7 +8,7 @@ export default function Home() {
   const { state, dispatch } = useContext(AuthContext);
 
   if (!state.isLoggedIn) {
-    return <Redirect to="/login" />;
+    //return <Redirect to="/login" />;
   }
 
   const { avatar_url, name, public_repos, followers, following } = state.user

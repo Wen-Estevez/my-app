@@ -12,7 +12,41 @@ export default function Login() {
   const { client_id, redirect_uri } = state;
 
   useEffect(() => {
+    // After requesting Github access, Github redirects back to your app with a code parameter
+    const url = window.location.href;
+    const hasCode = url.includes("?code=");
 
+    // If Github API returns the code parameter
+    if (hasCode) {
+      const newUrl = url.split("?code=");
+      window.history.pushState({}, null, newUrl[0]);
+      setData({ ...data, isLoading: true });
+
+      const requestData = {
+        code: newUrl[1]
+      };
+
+      const proxy_url = state.proxy_url;
+
+      // Use code parameter and other parameters to make POST request to proxy_server
+      fetch(proxy_url, {
+        method: "POST",
+        body: JSON.stringify(requestData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          dispatch({
+            type: "LOGIN",
+            payload: { user: data, isLoggedIn: true }
+          });
+        })
+        .catch(error => {
+          setData({
+            isLoading: false,
+            errorMessage: "Sorry! Login failed"
+          });
+        });
+    }
   }, [state, dispatch, data]);
 
   if (state.isLoggedIn) {
@@ -44,7 +78,7 @@ export default function Login() {
                   }}
                 >
                   <GithubIcon />
-                  <span>Login con GitHub</span>
+                  <span>Login with GitHub</span>
                 </a>
               </>
             )}
