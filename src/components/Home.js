@@ -69,7 +69,7 @@ export default function Home() {
           </div>
         </div>
         {viewFavorites?<div>
-          {followed.map((repo,i) => <div key={repo.id}>
+          {favorites.map((repo,i) => <div key={repo.id}>
           <div className="content">
             <span>{repo.name}</span>
             {!repo?.followed?<button onClick={()=>handleFollow(repo,i)}>Seguir</button>:
