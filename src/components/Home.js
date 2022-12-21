@@ -3,9 +3,11 @@ import { Redirect } from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
 export default function Home() {
   const { state, dispatch } = useContext(AuthContext);
+  const history = useHistory()
+  if (!state.isLoggedIn) { history.push("/login") }
 
   const { avatar_url, public_repos, followers, following, repos_url, login } = state.user
 
@@ -50,7 +52,6 @@ export default function Home() {
     fetchData()
   }, [])
 
-  if (!state.isLoggedIn) { return <Redirect to="/login" /> }
   return (
     <Wrapper>
       <div className="container">
@@ -59,7 +60,7 @@ export default function Home() {
           <button onClick={handleFilter}>Buscar</button>
           <button onClick={handleFavorites}>Favoritos</button>
           <button onClick={handleLogout}>Cerrar sesion</button>
-          
+
         </div>
         <div>
           <div className="content">
