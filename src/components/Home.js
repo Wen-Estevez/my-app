@@ -71,15 +71,18 @@ const Wrapper = Styled.section`
     width: 100px;
     height: 35px;
     margin: 10px 10px 0 0;
+    padding: 5px;
     align-self: flex-end;
-    background-color: #0041C2;
     color: #fff;
+    background: linear-gradient(90deg, #013E5C 10%, #2DB980 100%);
     text-align: center;
-    border-radius: 3px;
-    border: 1px solid #0041C2;
+    border-radius: 5px;
     &:hover{
-      background-color: #fff;
-      color: #0041C2;
+      transform: scale(0.9);
+      background: -webkit-linear-gradient(#013E5C, #2DB980);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      border: 1px solid #013E5C;
     }
   }
   >div{
