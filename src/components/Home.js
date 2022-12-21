@@ -34,7 +34,6 @@ export default function Home() {
 
   const handleFollow= (repo,i)=>{
     repo.followed= true;
-    console.log(followed)
     setFollowed(followed.concat([repo]))
   }
 
