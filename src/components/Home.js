@@ -1,37 +1,60 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
-
+import axios from "axios";
 
 export default function Home() {
   const { state, dispatch } = useContext(AuthContext);
 
-  if (!state.isLoggedIn) {
-    return <Redirect to="/login" />;
+  const { avatar_url, public_repos, followers, following, repos_url, login } = state.user
+
+  const [repos, setRepos] = useState([]);
+  const [word, setWord] = useState([]);
+
+  const fetchData = async () =>{
+    const fetchRepos = await axios.get(repos_url);
+    setRepos(fetchRepos.data)
   }
-
-  const { avatar_url, name, public_repos, followers, following } = state.user
-
   const handleLogout = () => {
     dispatch({
       type: "LOGOUT"
     });
   }
 
+  const handleFilter = () => {
+    const search = repos.filter((repo)=>repo.name===word);
+    setRepos(search)
+  }
+
+  const handleInput =(e)=>{setWord(e.target.value)}
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+  
+  if (!state.isLoggedIn) {return <Redirect to="/login" />}
   return (
     <Wrapper>
       <div className="container">
-        <button onClick={() => handleLogout()}>Cerrar sesion</button>
+        <button onClick={handleLogout}>Cerrar sesion</button>
+        <input onChange={handleInput}/>
+        <button onClick={handleFilter}>Buscar</button>
+        <button onClick={fetchData}>Borrar</button>
         <div>
           <div className="content">
             <img src={avatar_url} alt="Avatar" />
-            <span>{name}</span>
+            <span>{login}</span>
             <span>{public_repos} Repositorios</span>
             <span>{followers} Seguidores</span>
             <span>{following} Siguiendo</span>
           </div>
         </div>
+        {repos.map((repo) => <div>
+          <div className="content">
+            <span>{repo.name}</span>
+          </div>
+        </div>)}
       </div>
     </Wrapper>
   );
