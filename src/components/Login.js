@@ -57,8 +57,8 @@ export default function Login() {
     <Wrapper>
       <section className="container">
         <div>
-          <h1>Welcome</h1>
-          <span>Mi app</span>
+          <h1>Prueba técnica Hello BUILD</h1>
+          <span>Wendy Acevedo</span>
           <span>{data.errorMessage}</span>
           <div className="login-container">
             {data.isLoading ? (
@@ -78,7 +78,7 @@ export default function Login() {
                   }}
                 >
                   <GithubIcon />
-                  <span>Login with GitHub</span>
+                  <span>Iniciar sesion con GitHub</span>
                 </a>
               </>
             )}
@@ -96,19 +96,21 @@ const Wrapper = Styled.section`
     align-items: center;
     height: 100vh;
     font-family: Arial;
-    
+
     > div:nth-child(1) {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 25px;
+      box-shadow: 5px 5px 6px 4px rgba(214,214,214,1);
       transition: 0.3s;
       width: 25%;
       height: 45%;
       > h1 {
         font-size: 2rem;
         margin-bottom: 20px;
+        
       }
       > span:nth-child(2) {
         font-size: 1.1rem;
