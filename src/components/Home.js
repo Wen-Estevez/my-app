@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   const handleFilter = () => {
-    const search = repos.filter((repo) => repo.name === word);
+    const search = repos.filter((repo) => repo.name.toLowerCase().includes(word.toLowerCase()) );
     setRepos(search)
   }
 
