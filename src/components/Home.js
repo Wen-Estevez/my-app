@@ -68,7 +68,7 @@ export default function Home() {
             <span>{following} Siguiendo</span>
           </div>
         </div>
-        {viewFavorites?<div>
+        {viewFavorites?<div className="repoContainer">
           {favorites.map((repo,i) => <div key={repo.id}>
           <div className="content">
             <span>{repo.name}</span>
@@ -76,7 +76,7 @@ export default function Home() {
             <button onClick={()=>handleUnfollow(repo,i)}>Dejar de seguir</button>}
           </div>
         </div>)}
-        </div>:<div>
+        </div>:<div  className="repoContainer">
         {repos.map((repo,i) => <div key={repo.id}>
           <div className="content">
             <span>{repo.name}</span>
@@ -161,5 +161,9 @@ const Wrapper = Styled.section`
   
     }
   }
+  .repoContainer{
+    display: flex;
+    flex-wrap:wrap;
+    }
 }
 `;
