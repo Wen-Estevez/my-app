@@ -32,18 +32,18 @@ export default function Home() {
 
   const handleInput = (e) => { setWord(e.target.value) }
 
-  const handleFollow= (repo,i)=>{
-    repo.followed= true;
+  const handleFollow = (repo, i) => {
+    repo.followed = true;
     setFollowed(followed.concat([repo]))
   }
 
-  const handleUnfollow= (repo,i)=>{
-    repo.followed= false;
-    setFollowed(followed.filter((el)=>el.id!==repo.id))
+  const handleUnfollow = (repo, i) => {
+    repo.followed = false;
+    setFollowed(followed.filter((el) => el.id !== repo.id))
   }
 
-  const favorites = repos.filter((repo)=>repo?.followed)
-  const handleFavorites= ()=>{
+  const favorites = repos.filter((repo) => repo?.followed)
+  const handleFavorites = () => {
     setViewFavorites(!viewFavorites)
   }
   useEffect(() => {
@@ -54,10 +54,13 @@ export default function Home() {
   return (
     <Wrapper>
       <div className="container">
-        <button onClick={handleLogout}>Cerrar sesion</button>
-        <input onChange={handleInput} placeholder="Buscar repositorio..." />
-        <button onClick={handleFilter}>Buscar</button>
-        <button onClick={handleFavorites}>Favoritos</button>
+        <div className="buttons">
+          <input onChange={handleInput} placeholder="Buscar repositorio..." />
+          <button onClick={handleFilter}>Buscar</button>
+          <button onClick={handleFavorites}>Favoritos</button>
+          <button onClick={handleLogout}>Cerrar sesion</button>
+          
+        </div>
         <div>
           <div className="content">
             <img src={avatar_url} alt="Avatar" />
@@ -67,22 +70,22 @@ export default function Home() {
             <span>{following} Siguiendo</span>
           </div>
         </div>
-        {viewFavorites?<div className="repoContainer">
-          {favorites.map((repo,i) => <div key={repo.id}>
-          <div className="content">
-            <span>{repo.name}</span>
-            {!repo?.followed?<button onClick={()=>handleFollow(repo,i)}>Seguir</button>:
-            <button onClick={()=>handleUnfollow(repo,i)}>Dejar de seguir</button>}
-          </div>
-        </div>)}
-        </div>:<div  className="repoContainer">
-        {repos.map((repo,i) => <div key={repo.id}>
-          <div className="content">
-            <span>{repo.name}</span>
-            {!repo?.followed?<button onClick={()=>handleFollow(repo,i)}>Seguir</button>:
-            <button onClick={()=>handleUnfollow(repo,i)}>Dejar de seguir</button>}
-          </div>
-        </div>)}
+        {viewFavorites ? <div className="repoContainer">
+          {favorites.map((repo, i) => <div key={repo.id}>
+            <div className="content">
+              <span>{repo.name}</span>
+              {!repo?.followed ? <button onClick={() => handleFollow(repo, i)}>Favorito</button> :
+                <button onClick={() => handleUnfollow(repo, i)}>Eliminar de favoritos</button>}
+            </div>
+          </div>)}
+        </div> : <div className="repoContainer">
+          {repos.map((repo, i) => <div key={repo.id}>
+            <div className="content">
+              <span>{repo.name}</span>
+              {!repo?.followed ? <button onClick={() => handleFollow(repo, i)}>Añadir a favoritos</button> :
+                <button onClick={() => handleUnfollow(repo, i)}>Eliminar de favoritos</button>}
+            </div>
+          </div>)}
         </div>}
       </div>
     </Wrapper>
@@ -94,23 +97,25 @@ const Wrapper = Styled.section`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: Arial;  
+  font-family: Arial; 
   input{
-    width: 50%;
-    padding: 8px;
+    width: 70%;
+    padding: 11px;
     font-size: 15px;
     margin: auto;
     border-radius: 15px;
     border: 1px solid #ccc;
     box-shadow: 3px 2px 5px 0px rgba(179,179,179,1);
   }
+  .buttons{
+    display:flex;
+  }
   button{
     all: unset;
     width: 100px;
     height: 35px;
-    margin: 10px 10px 0 0;
+    margin: 10px;
     padding: 5px;
-    align-self: flex-end;
     color: #fff;
     background: linear-gradient(90deg, #013E5C 10%, #2DB980 100%);
     text-align: center;
@@ -131,7 +136,8 @@ const Wrapper = Styled.section`
     font-size: 18px;
     justify-content: center;
     align-items: center;    
-    .content{
+    .content{ 
+      margin: 15px;
       display: flex;
       flex-direction: column;
       padding: 20px 100px;    
@@ -161,8 +167,17 @@ const Wrapper = Styled.section`
     }
   }
   .repoContainer{
+    width: 90%;
     display: flex;
     flex-wrap:wrap;
+    margin: auto;
+    text-align: center;
+    button{
+      font-size: 15px;
+      background: #012435;
+      width:90%;
+      height:20px;
+    }
     }
 }
 `;
