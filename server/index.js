@@ -31,7 +31,6 @@ app.post("/authenticate", (req, res) => {
   // Request to exchange code for an access token
   axios.post(`https://github.com/login/oauth/access_token`, data)
     .then((response) => {
-      console.log(response)
       const access_token = response.data.slice(13, -29)
       return axios.get(`https://api.github.com/user`, {
         headers: {
@@ -45,7 +44,7 @@ app.post("/authenticate", (req, res) => {
 
     })
     .catch((error) => {
-      console.log(error)
+      //console.log(error)
       return res.status(400).json(error);
     });
 });
