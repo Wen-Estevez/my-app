@@ -117,11 +117,15 @@ const Wrapper = Styled.section`
       .login-container {
         background-color: #000;
         width: 70%;
-        border-radius: 3px;
+        border-radius: 10px;
         color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
+        &:hover{
+          background: linear-gradient(90deg, #013E5C 10%, #2DB980 100%);
+          transform: scale(1.02);
+        }
         > .login-link {
           text-decoration: none;
           color: #fff;

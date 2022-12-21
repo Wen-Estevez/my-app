@@ -17,15 +17,15 @@ export default function Home() {
     dispatch({
       type: "LOGOUT"
     });
-  } 
+  }
 
   return (
     <Wrapper>
       <div className="container">
-        <button onClick={()=> handleLogout()}>Cerrar sesion</button>
+        <button onClick={() => handleLogout()}>Cerrar sesion</button>
         <div>
           <div className="content">
-            <img src={avatar_url} alt="Avatar"/>
+            <img src={avatar_url} alt="Avatar" />
             <span>{name}</span>
             <span>{public_repos} Repositorios</span>
             <span>{followers} Seguidores</span>
@@ -42,7 +42,7 @@ const Wrapper = Styled.section`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: Arial;
+  font-family: Arial;  
   button{
     all: unset;
     width: 100px;
@@ -65,13 +65,17 @@ const Wrapper = Styled.section`
     display: flex;
     font-size: 18px;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
     .content{
       display: flex;
       flex-direction: column;
       padding: 20px 100px;    
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 25px;
+      box-shadow: 5px 5px 6px 4px rgba(214,214,214,1);
       width: auto;
+      &:hover{
+        transform: scale(1.05);
+      }
   
       img{
         height: 150px;
